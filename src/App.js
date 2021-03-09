@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+// Libraries
+import React, { useEffect } from 'react'
+import { Container, AppBar, Typography, Row, Grid, Grow} from '@material-ui/core'
+import { useDispatch } from 'react-redux'
+// Components
+import Posts from "./components/Posts/Posts"
+import PostForm from "./components/PostForm/PostForm"
+// Actions
+import { getPosts } from './actions/posts'
+// Resources
+import memoriesLogo from './images/memories.png'
+import useStyles from './styles'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const classes = useStyles()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getPosts())
+    }, [dispatch])
+
+    return (
+        <div>
+            <Container  maxWidth='lg'>
+                <AppBar className={classes.appBar} position='static' color="inherit">
+                    <Typography className={classes.heading}  variant="h2" align="center">Memories</Typography>
+                    <img className={classes.image} src={memoriesLogo} alt="memoriesLogo" height="60" />
+                </AppBar>
+                <Grow in>
+                    <Container>
+                        <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+                            <Grid item xs={12} sm={7}>
+                                <Posts />
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <PostForm></PostForm>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Grow>
+            </Container>
+        </div>
+    )
 }
 
-export default App;
+
+
+export default App
