@@ -1,5 +1,5 @@
 // Libraries
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, AppBar, Typography, Row, Grid, Grow} from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 // Components
@@ -12,12 +12,13 @@ import memoriesLogo from './images/memories.png'
 import useStyles from './styles'
 
 const App = () => {
+    const [currentId, setCurrentId] = useState(null)
     const classes = useStyles()
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getPosts())
-    }, [dispatch])
+    }, [currentId, dispatch])
 
     return (
         <div>
@@ -28,12 +29,12 @@ const App = () => {
                 </AppBar>
                 <Grow in>
                     <Container>
-                        <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+                        <Grid container className={classes.mainContainer} justify="space-between" alignItems="stretch" spacing={3}>
                             <Grid item xs={12} sm={7}>
-                                <Posts />
+                                <Posts setCurrentId={setCurrentId} />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <PostForm></PostForm>
+                                <PostForm  currentId={currentId} setCurrentId={setCurrentId} />
                             </Grid>
                         </Grid>
                     </Container>
