@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { signin, signup } from "../../actions/auth"
-import { Avatar, Container, Paper, Typography, Grid, TextField, Button } from "@material-ui/core";
+import { Avatar, Container, Paper, Typography, Grid, Button } from "@material-ui/core";
 import LockOutlineIcon from "@material-ui/icons/LockOutlined";
 import InputAuthForm from "./InputAuthForm";
 import Icon from './icon'

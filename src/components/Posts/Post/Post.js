@@ -35,7 +35,7 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant='h6'>{post.name || post.creator}</Typography>
                 <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
             </div>
-            { (user?.result?.googleId === post?.creator || user.result.userId === post?.creator) && (
+            { (user?.result?.googleId === post?.creator || user?.result?.userId === post?.creator) && (
             <div className={classes.overlay2}>
                 <Button style={{ color: "white" }} size='small' onClick={() => setCurrentId(post._id) }>
                     <MoreHorizIcon></MoreHorizIcon>
@@ -56,10 +56,10 @@ const Post = ({ post, setCurrentId }) => {
                 </Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
+                <Button size="small" color="primary" disabled={!(user?.result)} onClick={() => dispatch(likePost(post._id))}>
                     <Likes />     
                 </Button>
-                { (user?.result?.googleId === post?.creator || user.result.userId === post?.creator) && (
+                { (user?.result?.googleId === post?.creator || user?.result?.userId === post?.creator) && (
                 <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize="small"/>&nbsp; Delete        
                 </Button>
